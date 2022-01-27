@@ -8,15 +8,31 @@ from selfdrive.version import get_version
 API_HOST = os.getenv('API_HOST', 'https://api.commadotai.com')
 
 class Api():
+  """ Attributes:
+      dongle_id - the ID of the dongle connected
+      private_key : str - the private rsa key
+  """
   def __init__(self, dongle_id):
     self.dongle_id = dongle_id
     with open(PERSIST+'/comma/id_rsa') as f:
       self.private_key = f.read()
 
   def get(self, *args, **kwargs):
+    """ Get an API request.
+    
+        Params:
+        *args - arguments to pass to the request
+        **kwargs - keyword aruguments to pass to the request
+    """
     return self.request('GET', *args, **kwargs)
 
   def post(self, *args, **kwargs):
+    """ Post an API request.
+    
+        Params:
+        *args - arguments passed to the request
+        **kwargs - keyword arguments passed to the request
+    """
     return self.request('POST', *args, **kwargs)
 
   def request(self, method, endpoint, timeout=None, access_token=None, **params):
