@@ -24,6 +24,23 @@ ACCEL_MIN = -3.5
 
 
 class CarInterfaceBase(ABC):
+  """ 
+      Abstract class/interface for cars.
+  
+      Attributes:
+      CP : car.CarParams - the car parameters
+      VM : VehicleModel - model representing the car
+      frame : int - integer state of the car for delaying processes
+      steering_unpressed : int - time since last manual steer
+      low_speed_alert : bool - low speed alert active state
+      silent_steer_warning : bool - boolean state indicating to use a less harsh steer warning
+      CS : CarState - the CarState for this car
+      cp : CANParser - the CANParser for this car
+      cp_cam : CANParser - the CANParser for the cameras
+      cp_body : CANParser - the CANParser for the car body
+      cp_loopback : CANParser - the loop-back CANParser
+      CC : CarController - the CarController representing this car
+  """
   def __init__(self, CP, CarController, CarState):
     self.CP = CP
     self.VM = VehicleModel(CP)
@@ -46,6 +63,13 @@ class CarInterfaceBase(ABC):
 
   @staticmethod
   def get_pid_accel_limits(CP, current_speed, cruise_speed):
+    """ Return the acceleration limits for the car.
+        
+        Params:
+        CP : car.CarParams - the car parameters
+        current_speed - the current speed
+        cruise_speed - the speed at which ACC is set
+    """
     return ACCEL_MIN, ACCEL_MAX
 
   @staticmethod
