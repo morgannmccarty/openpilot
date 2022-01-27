@@ -208,6 +208,15 @@ class CarStateBase(ABC):
     return float(v_ego_x[0]), float(v_ego_x[1])
 
   def get_wheel_speeds(self, fl, fr, rl, rr, unit=CV.KPH_TO_MS):
+    """ Take wheel speeds and modify them based on the car's wheel speed factor. Return the adjusted wheel speeds.
+    
+        Params:
+        fl - front left wheel speed
+        fr - front right wheel speed
+        rl - rear left wheel speed
+        rr - rear right wheel speed
+        unit - unit conversion to use for measuring wheel speed (default = CV.KPH_TO_MS)
+    """
     factor = unit * self.CP.wheelSpeedFactor
 
     wheelSpeeds = car.CarState.WheelSpeeds.new_message()
