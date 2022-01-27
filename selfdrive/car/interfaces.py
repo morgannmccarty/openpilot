@@ -201,6 +201,11 @@ class CarStateBase(ABC):
                          K=[[0.12287673], [0.29666309]])
 
   def update_speed_kf(self, v_ego_raw):
+    """ Update speed estimation using new measured data. Return the new estimate.
+    
+        Param:
+        v_ego_raw - the new raw measurement of the car's speed
+    """
     if abs(v_ego_raw - self.v_ego_kf.x[0][0]) > 2.0:  # Prevent large accelerations when car starts at non zero speed
       self.v_ego_kf.x = [[v_ego_raw], [0.0]]
 
