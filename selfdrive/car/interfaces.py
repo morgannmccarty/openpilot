@@ -75,6 +75,13 @@ class CarInterfaceBase(ABC):
   @staticmethod
   @abstractmethod
   def get_params(candidate, fingerprint=gen_empty_fingerprint(), car_fw=None):
+    """ Return the car's params.
+    
+        Params:
+        candidate : str - name of the car
+        fingerprint : dict - fingerprint dictionary
+        car_fw : list - list of car fws
+    """
     pass
 
   @staticmethod
